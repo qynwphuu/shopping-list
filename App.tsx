@@ -9,6 +9,7 @@ import {
   Alert,
   TextInput,
   FlatList,
+  DevSettings,
 } from "react-native";
 
 type dataList = {
@@ -21,7 +22,10 @@ export default function App() {
   });
   const [list, setList] = useState<dataList[]>([]);
 
-  const Add = () => {};
+  const Add = () => {
+    setList([...list, iniList]) 
+    setiniList({description: ""})
+  };
 
   const Clear = () => {};
 
@@ -30,7 +34,6 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         return (
         <View style={styles.container}>
-          
           <TextInput
             value={iniList.description}
             onChangeText={(text) =>
@@ -38,23 +41,23 @@ export default function App() {
             }
             placeholder="Enter a thing to buy..."
           />
+
+          <View style={styles.buttonContainer}>
+            <Button onPress={Add} title="ADD" />
+            <Button onPress={Clear} title="CLEAR" />
+          </View>
+
+          <Text style={styles.titleText}>Shopping List:</Text>
+          <FlatList
+            data={list}
+            renderItem={({ item }) => (
+              <View>
+                <Text>{item.description}</Text>
+              </View>
+            )}
+          />
         </View>
         );
-
-        <View style={styles.buttonContainer}>
-          <Button onPress={Add} title="ADD" />
-          <Button onPress={Clear} title="CLEAR" />
-        </View>
-
-        <Text style={styles.titleText}>Shopping List:</Text>
-        <FlatList
-          data={list}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.description}</Text>
-            </View>
-          )}
-        />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -62,11 +65,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    paddingTop: 100,
+    paddingBottom: 10,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
   },
 
   input: {
@@ -79,8 +82,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: 80,
-    marginTop: 10,
+    width: 120,
   },
 
   description: {
@@ -89,8 +91,9 @@ const styles = StyleSheet.create({
   },
 
   titleText: {
+    paddingTop: 10,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: "blue"
+    fontWeight: "bold",
+    color: "blue",
   },
 });
