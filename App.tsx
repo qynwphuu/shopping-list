@@ -23,16 +23,17 @@ export default function App() {
   const [list, setList] = useState<dataList[]>([]);
 
   const Add = () => {
-    setList([...list, iniList]) 
-    setiniList({description: ""})
+    setList([...list, iniList]);
+    setiniList({ description: "" });
   };
 
-  const Clear = () => {};
+  const Clear = () => {
+    setList([]);
+  };
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        return (
         <View style={styles.container}>
           <TextInput
             value={iniList.description}
@@ -57,7 +58,6 @@ export default function App() {
             )}
           />
         </View>
-        );
       </SafeAreaView>
     </SafeAreaProvider>
   );
