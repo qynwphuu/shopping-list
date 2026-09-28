@@ -12,13 +12,11 @@ import {
 } from "react-native";
 
 type dataList = {
-  title: string;
   description: string;
 };
 
 export default function App() {
   const [iniList, setiniList] = useState<dataList>({
-    title: "",
     description: "",
   });
   const [list, setList] = useState<dataList[]>([]);
@@ -32,18 +30,13 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         return (
         <View style={styles.container}>
-          <TextInput
-            value={iniList.title}
-            onChangeText={(text) => setiniList({ ...iniList, title: text })}
-            placeholder="Enter a title..."
-          />
-
+          
           <TextInput
             value={iniList.description}
             onChangeText={(text) =>
               setiniList({ ...iniList, description: text })
             }
-            placeholder="Enter a description..."
+            placeholder="Enter a thing to buy..."
           />
         </View>
         );
@@ -52,13 +45,12 @@ export default function App() {
           <Button onPress={Add} title="ADD" />
           <Button onPress={Clear} title="CLEAR" />
         </View>
-        
-        <Text style={styles.text}>Shopping List:</Text>
+
+        <Text style={styles.titleText}>Shopping List:</Text>
         <FlatList
           data={list}
           renderItem={({ item }) => (
             <View>
-              <Text>{item.title}</Text>
               <Text>{item.description}</Text>
             </View>
           )}
@@ -70,10 +62,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   input: {
@@ -90,8 +83,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  text: {
-    marginTop: 10,
+  description: {
+    marginTop: 5,
     marginBottom: 5,
+  },
+
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "blue"
   },
 });
